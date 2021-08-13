@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import NavBar from './NavBar';
+import MyPlants from './MyPlants';
+import Login from './Login';
+import Calendar from './Calendar';
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/current_user")
+    .then(res => res.json())
+    .then(data => setUser(data))
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar user={user} setUser={setUser} />
+      <Switch>
+        <Route exact path="/">
+          <MyPlants user={user} />
+        </Route>
+        <Route exact path="/login">
+          <Login onLogin={setUser} />
+        </Route>
+        <Route exact path="/calendar">
+          <Calendar />
+        </Route>
+      </Switch>
     </div>
   );
 }
