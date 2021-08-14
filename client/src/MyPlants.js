@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import AddPlant from './AddPlant'
 
 function MyPlants({user}) {
     document.title = "Plant Parenthood | My Plants"
@@ -16,7 +17,7 @@ function MyPlants({user}) {
 
     let plantArray = myPlants.map(plant => {
         return(
-        <div>
+        <div key={plant.id}>
             <br/>
             <img style={{height: '25%', width: '25%'}} src={plant.image} alt={plant.plant.name}/><br/>
             <b>{plant.plant.name}</b><br/>
@@ -29,6 +30,7 @@ function MyPlants({user}) {
 
     return(
         <>
+        <AddPlant />
         {plantArray.length > 0 ? plantArray : <div>You have no plants yet!</div>}
         </>
     )

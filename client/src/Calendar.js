@@ -1,4 +1,5 @@
-function Calendar() {
+function Calendar({user}) {
+    document.title = "Plant Parenthood | Calendar"
     return(
         <>
         </>

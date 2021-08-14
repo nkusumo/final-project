@@ -1,23 +1,23 @@
 import { Navbar, Container, Nav } from "react-bootstrap"
 import Button from 'react-bootstrap/Button'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function NavBar({user, setUser}) {
 
-    // let history = useHistory()
+    let history = useHistory()
 
-    // function handleLogout() {
-    //     async function logout() {
-    //         const res = await fetch("/logout", {
-    //             method: 'DELETE'
-    //         })
-    //         if (res.ok) {
-    //             setUser(null)
-    //             history.push('/')
-    //         }
-    //     }
-    //     logout();
-    // }
+    function handleLogout() {
+        async function logout() {
+            const res = await fetch("/logout", {
+                method: 'DELETE'
+            })
+            if (res.ok) {
+                setUser(null)
+                history.push('/login')
+            }
+        }
+        logout();
+    }
 
     return(
         <Navbar>
@@ -28,9 +28,10 @@ function NavBar({user, setUser}) {
                 <Navbar.Text>Hi, {user.name}!</Navbar.Text>
                 <Nav.Link href="/">My Plants</Nav.Link>
                 <Nav.Link href="/calendar">Calendar</Nav.Link>
-                <Button>Logout</Button>
+                <Button onClick={handleLogout}>Logout</Button>
             </>
-            : null}
+            : 
+            <Navbar.Text>Hi!</Navbar.Text>}
             </Nav>
             </Container>
         </Navbar>
