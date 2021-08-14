@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import AddPlant from './AddPlant'
+import PlantCard from './PlantCard'
 
 function MyPlants({user}) {
     document.title = "Plant Parenthood | My Plants"
@@ -15,18 +16,19 @@ function MyPlants({user}) {
         }
     },[user])
 
-    let plantArray = myPlants.map(plant => {
-        return(
-        <div key={plant.id}>
-            <br/>
-            <img style={{height: '25%', width: '25%'}} src={plant.image} alt={plant.plant.name}/><br/>
-            <b>{plant.plant.name}</b><br/>
-            <em>{plant.plant.scientific_name}</em><br/>
-            Acquired: {plant.date}<br/>
-        </div>
-        )
-    })
-    console.log(plantArray.length)
+    let plantArray = myPlants.map(plant => <PlantCard key={plant.id} {...plant} />)
+    // let plantArray = myPlants.map(plant => {
+    //     return(
+    //     <div key={plant.id}>
+    //         <br/>
+    //         <img style={{height: '25%', width: '25%'}} src={plant.image} alt={plant.plant.name}/><br/>
+    //         <b>{plant.plant.name}</b><br/>
+    //         <em>{plant.plant.scientific_name}</em><br/>
+    //         Acquired: {plant.date}<br/>
+    //     </div>
+    //     )
+    // })
+    console.log(myPlants)
 
     return(
         <>

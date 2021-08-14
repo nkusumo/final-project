@@ -20,21 +20,22 @@ function NavBar({user, setUser}) {
     }
 
     return(
+        <div style={{width: '25%'}}>
         <Navbar>
             <Container>
             <Nav>
             {user ? 
             <>
-                <Navbar.Text>Hi, {user.name}!</Navbar.Text>
-                <Nav.Link href="/">My Plants</Nav.Link>
-                <Nav.Link href="/calendar">Calendar</Nav.Link>
-                <Button onClick={handleLogout}>Logout</Button>
+                <Navbar.Text>Hi, {user.name}!</Navbar.Text><br/>
+                <Nav.Link href="/">My Plants</Nav.Link><br/>
+                <Button onClick={handleLogout}>Logout</Button><br/>
             </>
             : 
-            <Navbar.Text>Hi!</Navbar.Text>}
+            <Nav.Link href="/login">Login</Nav.Link>}
             </Nav>
             </Container>
         </Navbar>
+        </div>
     )
 }
 
