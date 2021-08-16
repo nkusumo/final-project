@@ -15,16 +15,27 @@ names = []
 10.times {names.push(Faker::Name.first_name)}
 names.each {|user| User.create(name: user, username: "#{user}#{rand(1..100)}", password: "1234")}
 
-puts "seeding plants..."
-Plant.create(name: "Bird of Paradise", scientific_name: "Strelitzia reginae")
-Plant.create(name: "Parlor Palm", scientific_name: "Chamaedorea elegans")
-Plant.create(name: "Monstera", scientific_name: "Monstera deliciosa")
-Plant.create(name: "Variegated Rubber Tree", scientific_name: "Ficus elastica 'Tineke'")
-Plant.create(name: "Chinese Money Plant", scientific_name: "Pilea peperomioides")
-Plant.create(name: "Fiddle Leaf Fig", scientific_name: "Ficus lyrata")
-Plant.create(name: "Snake Plant", scientific_name: "Sansevieria trifasciata")
-Plant.create(name: "Pothos", scientific_name: "Epipremnum aureum")
-Plant.create(name: "ZZ Plant", scientific_name: "Zamioculcas zamiifolia")
+# puts "seeding plants..."
+# Plant.create(name: "Bird of Paradise", scientific_name: "Strelitzia reginae")
+# Plant.create(name: "Parlor Palm", scientific_name: "Chamaedorea elegans")
+# Plant.create(name: "Monstera", scientific_name: "Monstera deliciosa")
+# Plant.create(name: "Variegated Rubber Tree", scientific_name: "Ficus elastica 'Tineke'")
+# Plant.create(name: "Chinese Money Plant", scientific_name: "Pilea peperomioides")
+# Plant.create(name: "Fiddle Leaf Fig", scientific_name: "Ficus lyrata")
+# Plant.create(name: "Snake Plant", scientific_name: "Sansevieria trifasciata")
+# Plant.create(name: "Pothos", scientific_name: "Epipremnum aureum")
+# Plant.create(name: "ZZ Plant", scientific_name: "Zamioculcas zamiifolia")
+plants = [
+    {name: "Bird of Paradise", scientific_name: "Strelitzia reginae"}, 
+    {name: "Parlor Palm", scientific_name: "Chamaedorea elegans"},
+    {name: "Monstera", scientific_name: "Monstera deliciosa"},
+    {name: "Variegated Rubber Tree", scientific_name: "Ficus elastica 'Tineke'"},
+    {name: "Chinese Money Plant", scientific_name: "Pilea peperomioides"},
+    {name: "Fiddle Leaf Fig", scientific_name: "Ficus lyrata"},
+    {name: "Snake Plant", scientific_name: "Sansevieria trifasciata"},
+    {name: "Pothos", scientific_name: "Epipremnum aureum"},
+    {name: "ZZ Plant", scientific_name: "Zamioculcas zamiifolia"}
+]
 
 puts "seeding parenthoods..."
 images = [
@@ -39,10 +50,10 @@ images = [
     "http://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_zz-plant_variant_medium_grant_mint_1200x.jpg?v=1627303858"
 ]
 (1..9).each do |i|
-    Parenthood.create(plant_id: i, user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1])
+    Parenthood.create(user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
 end
 (1..9).each do |i|
-    Parenthood.create(plant_id: i, user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1])
+    Parenthood.create(user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
 end
 
 puts "seeding logs..."

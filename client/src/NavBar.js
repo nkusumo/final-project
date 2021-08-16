@@ -1,4 +1,3 @@
-import { Navbar, Container, Nav } from "react-bootstrap"
 import Button from 'react-bootstrap/Button'
 import { useHistory, Link } from 'react-router-dom'
 
@@ -30,14 +29,3 @@ function NavBar({user, setUser}) {
 }
 
 export default NavBar;
-
-// <Navbar>
-// <Container>
-// <Nav>
-//     <Navbar.Text>Hi, {user.name}!</Navbar.Text><br/><br/>
-//     {/* <link href="/">My Plants</link><br/> */}
-//     <Nav.Link href="/calendar">Calendar</Nav.Link><br/>
-//     <Button onClick={handleLogout}>Logout</Button><br/>
-// </Nav>
-// </Container>
-// </Navbar>

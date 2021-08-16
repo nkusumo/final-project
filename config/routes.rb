@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :logs, only: [:index]
-  resources :parenthoods, only: [:index, :show, :create]
+  resources :parenthoods
   resources :plants
   resources :users, only: [:create, :show]
 
