@@ -11,3 +11,52 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+  
+#nav { grid-area: 2 / 1 / 6 / 2; }
+.div2 { grid-area: 1 / 1 / 2 / 5; }
+main { grid-area: 2 / 2 / 6 / 5; }
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+  
+#header { grid-area: 1 / 1 / 2 / 5; }
+#nav { grid-area: 2 / 1 / 6 / 2; }
+
+main { 
+  grid-area: 2 / 2 / 6 / 5; 
+  /* padding: 1rem; */
+  /* width: stretch; */
+  /* height: auto; */
+
+  /* background: #515DA2; */
+  /* opacity: .8; */
+}
+
+#cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  text-align: center;
+  border: grey solid 1px;
+  padding: 1rem;
+  width: 25rem;
+  height: 25rem;
+  display: inline-grid;
+  margin: 1rem 2rem;
+  box-shadow: 3px 4px #e04b52
+}

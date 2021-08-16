@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import AddPlant from './AddPlant'
 import PlantCard from './PlantCard'
+import Button from 'react-bootstrap/Button'
 
 function MyPlants({user}) {
     document.title = "Plant Parenthood | My Plants"
 
     const [myPlants, setMyPlants] = useState([])
+    const [showForm, setShowForm] = useState(false)
     console.log(user)
 
     useEffect(() => {
@@ -29,11 +31,15 @@ function MyPlants({user}) {
     //     )
     // })
     console.log(myPlants)
+    
 
     return(
         <>
-        <AddPlant />
-        {plantArray.length > 0 ? plantArray : <div>You have no plants yet!</div>}
+        <Button onClick={()=>setShowForm(!showForm)}>{!showForm ? "Add a plant to my collection" : "Hide form"}</Button>
+        {showForm ? <AddPlant /> : null}
+        <div id="cards-container">
+            {plantArray.length > 0 ? plantArray : <div>You have no plants yet!</div>}
+        </div>
         </>
     )
 }

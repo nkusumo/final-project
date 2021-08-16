@@ -1,28 +1,25 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-function PlantCard({date, image, plant}) {
-
-    const [renderPopUp, setRenderPopUp] = useState(false)
+function PlantCard({id, logs, date, image, plant}) {
+    
+    let logArray = logs.map(log => <div>{log.date}: {log.description}</div>)
 
     return(
-        <Card>
+        <Card className="card">
             <br/>
-            <img style={{height: '25%', width: '25%'}} src={image} alt={plant.name}/><br/>
+            <img style={{height: '50%', width: '50%'}} src={image} alt={plant.name}/><br/>
             <b>{plant.name}</b><br/>
             <em>{plant.scientific_name}</em><br/>
-            Acquired: {date}<br/>
+            Last watered: {date}<br/>
             <Popup trigger={<Button size="sm">Open details</Button>} modal>
                 <Carousel>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
+                    {logArray}
                 </Carousel>
             </Popup>
         </Card>

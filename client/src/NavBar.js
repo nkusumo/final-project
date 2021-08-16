@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav } from "react-bootstrap"
 import Button from 'react-bootstrap/Button'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 function NavBar({user, setUser}) {
 
@@ -20,23 +20,24 @@ function NavBar({user, setUser}) {
     }
 
     return(
-        <div style={{width: '25%'}}>
-        <Navbar>
-            <Container>
-            <Nav>
-            {user ? 
-            <>
-                <Navbar.Text>Hi, {user.name}!</Navbar.Text><br/>
-                <Nav.Link href="/">My Plants</Nav.Link><br/>
-                <Button onClick={handleLogout}>Logout</Button><br/>
-            </>
-            : 
-            <Nav.Link href="/login">Login</Nav.Link>}
-            </Nav>
-            </Container>
-        </Navbar>
+        <div id="nav">
+            Hi, {user.name}!<br/><br/>
+            <Link to="/">My Plants</Link><br/><br/>
+            <Link to="calendar">Calendar</Link><br/><br/>
+            <Button onClick={handleLogout}>Logout</Button><br/>
         </div>
     )
 }
 
 export default NavBar;
+
+// <Navbar>
+// <Container>
+// <Nav>
+//     <Navbar.Text>Hi, {user.name}!</Navbar.Text><br/><br/>
+//     {/* <link href="/">My Plants</link><br/> */}
+//     <Nav.Link href="/calendar">Calendar</Nav.Link><br/>
+//     <Button onClick={handleLogout}>Logout</Button><br/>
+// </Nav>
+// </Container>
+// </Navbar>
