@@ -6,6 +6,7 @@ import MyPlants from './MyPlants';
 import Login from './Login';
 import Calendar from './Calendar';
 import Header from './Header';
+import Footer from './Footer';
 
 function App() {
 
@@ -24,23 +25,26 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   return (
-    <div className="App">
+    <>
       <Header />
-      <NavBar user={user} setUser={setUser} />
-      <main>
-        <Switch>
-          <Route exact path="/">
-            <MyPlants user={user} />
-          </Route>
-          {/* <Route exact path="/login">
-            <Login onLogin={setUser} />
-          </Route> */}
-          <Route exact path="/calendar">
-            <Calendar />
-          </Route>
-        </Switch>
-      </main>
-    </div>
+      <div className="App">
+        <NavBar user={user} setUser={setUser} />
+        <main>
+          <Switch>
+            <Route exact path="/">
+              <MyPlants user={user} />
+            </Route>
+            {/* <Route exact path="/login">
+              <Login onLogin={setUser} />
+            </Route> */}
+            <Route exact path="/calendar">
+              <Calendar user={user} />
+            </Route>
+          </Switch>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
 

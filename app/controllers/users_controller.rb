@@ -14,6 +14,12 @@ class UsersController < ApplicationController
         render json: user_plants
     end
 
+    def my_waterings
+        user = User.find(params[:id])
+        waterings = user.my_waterings.sort_by {|w| w[:next_watering]}
+        render json: waterings
+    end
+
     private
 
     def user_params

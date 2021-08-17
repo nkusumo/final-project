@@ -76,11 +76,11 @@ function MyPlants({user}) {
     }
 
     let plantArray = myPlants.map(plant => <PlantCard key={plant.id} {...plant} handleDeletePlant={handleDeletePlant} watered={watered} updateWateringInterval={updateWateringInterval} />)
-    console.log(myPlants)
+    // console.log(myPlants)
 
     return(
         <>
-        <Button onClick={()=>setShowForm(!showForm)}>{!showForm ? "Add a plant to my collection" : "Hide form"}</Button>
+        <Button variant="outline-success" onClick={()=>setShowForm(!showForm)}>{!showForm ? "Add a plant to my collection" : "Hide form"}</Button>
         {showForm ? <AddPlant handleAddPlant={handleAddPlant} setShowForm={setShowForm} /> : null}
         <div id="cards-container">
             {plantArray.length > 0 ? plantArray : <div>You have no plants yet!</div>}
