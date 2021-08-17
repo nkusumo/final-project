@@ -60,10 +60,22 @@ function MyPlants({user}) {
             body: JSON.stringify({date: date})
         })
         .then(res => res.json())
-        .then(console.log)
+        .then(console.log) // update myPlants --> does this need to be here???
     }
 
-    let plantArray = myPlants.map(plant => <PlantCard key={plant.id} {...plant} handleDeletePlant={handleDeletePlant} watered={watered} />)
+    function updateWateringInterval(days, plant_id) {
+        fetch(`http://localhost:3000/parenthoods/${plant_id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({watering_frequency: days})
+        })
+        .then(res => res.json())
+        .then(console.log) // update myPlants --> does this need to be here???
+    }
+
+    let plantArray = myPlants.map(plant => <PlantCard key={plant.id} {...plant} handleDeletePlant={handleDeletePlant} watered={watered} updateWateringInterval={updateWateringInterval} />)
     console.log(myPlants)
 
     return(

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :logs, only: [:index]
+  resources :logs, only: [:index, :create]
   resources :parenthoods
   resources :plants
   resources :users, only: [:create, :show]
