@@ -1,13 +1,15 @@
+import { useState } from 'react';
+import AddLog from './AddLog'
+
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
 import CloseButton from 'react-bootstrap/CloseButton'
-import { useState } from 'react';
-import AddLog from './AddLog'
 import Form from 'react-bootstrap/Form'
+
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'reactjs-popup/dist/index.css';
 
 function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant_sci_name, handleDeletePlant, watered, updateWateringInterval}) {
 
@@ -15,9 +17,16 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
     const [lastWatered, setLastWatered] = useState(date)
     const [editDays, setEditDays] = useState(false)
     const [days, setDays] = useState(watering_frequency)
-    const [plantLog, setPlantLog] = useState(logs)
+    const [plantLog, setPlantLog] = useState(logs.reverse())
     
-    let logArray = plantLog.map(log => <div><br/><br/>{log.date}: {log.description}<br/>hi<br/></div>)
+    let logArray = plantLog.map(log => {
+    return(
+        <>
+        <h3>{log.date}</h3>
+        <h5>Description:</h5>
+        <p>{log.description}</p>
+        </>
+    )})
     console.log(plantLog.reverse())
     
     let oldDate = new Date(lastWatered.split("-")).toLocaleDateString()
@@ -69,7 +78,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         <Card className="card">
             <button class="material-icons" onClick={()=>handleDeletePlant(id)}>delete_outline</button>
             <b>{plant_name}</b>
-            <img style={{width: '75%', height: 'auto', marginLeft: 'auto', marginRight: 'auto'}} src={image} alt={plant_name}/>
+            <img style={{width: '20rem', height: '20rem', marginLeft: 'auto', marginRight: 'auto', objectFit: 'cover'}} src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>
             Last watered: {oldDate}<br/>
             {editDays ? 
@@ -90,7 +99,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
             }
             Water again on: {newDate(lastWatered, days)}<br/>
             <div style={{display: 'inline-block'}}>
-                <Popup trigger={<Button variant="outline-success" size="sm">Plant Diary</Button>} modal nested>
+                <Popup classname="diary" trigger={<Button variant="outline-success" size="sm">Plant Diary</Button>} modal nested>
                     <Carousel>
                         {logArray}
                     </Carousel>

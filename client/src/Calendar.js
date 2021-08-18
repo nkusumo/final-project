@@ -20,12 +20,14 @@ function Calendar({user}) {
         return(
         <tr>
             <td>{w.next_watering}</td>
-            <td>Water {w.name} ({w.scientific_name})</td>
+            <td>Water {w.name} <small><em>({w.scientific_name})</em></small></td>
         </tr>
     )})    
 
     return(
-        <Table>
+        <>
+        <h1>Water Your Plants!</h1>
+        <Table striped bordered variant="success" style={{width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
             <thead>
                 <tr>
                     <th>Day</th>
@@ -36,6 +38,7 @@ function Calendar({user}) {
                 {waterArray}
             </tbody>
         </Table>
+        </>
     )
 }
 

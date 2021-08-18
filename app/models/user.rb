@@ -2,6 +2,10 @@ class User < ApplicationRecord
     has_secure_password
     has_many :parenthoods
 
+    validates :name, :password, presence: true
+    validates :username, presence: true, uniqueness: true
+    validates :password, length: { minimum: 4 }
+
     def my_waterings
         self.parenthoods.map do |p|
             {

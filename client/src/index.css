@@ -55,7 +55,7 @@ main {
   border: grey solid 1px;
   padding: 1rem;
   width: 25rem;
-  height: 38rem;
+  height: 35rem;
   display: inline-grid;
   margin: 1rem 2rem;
   /* box-shadow: 5px 5px 5px rgba(252, 225, 207, 0.555) */
@@ -141,6 +141,29 @@ button.material-icons {
   width: 50%;
   border-width: 1px;
   border-color: grey;
+}
+
+.diary-content {
+  margin: auto;
+  width: 50%;
+  max-width: 800px;
+  height: 350px;
+}
+
+.carousel-root {
+  height: 90%;
+  width: 100%;
+}
+
+.slider-wrapper.axis-horizontal {
+  height: 350px;
+  padding-top: 50px;
+}
+
+button.btn.btn-success.btn-sm {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 /* salmon color rgba(252, 225, 207, 0.555) */
