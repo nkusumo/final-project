@@ -17,13 +17,12 @@ function Calendar({user}) {
         }}, [user])
 
     let waterArray = waterings.map(w => {
+        return(
         <tr>
             <td>{w.next_watering}</td>
-            <td>{w.next_watering}</td>
-            {/* <td>Water {w.name} ({w.scientific_name})</td> */}
+            <td>Water {w.name} ({w.scientific_name})</td>
         </tr>
-    })    
-    console.log(waterArray)
+    )})    
 
     return(
         <Table>
@@ -34,12 +33,6 @@ function Calendar({user}) {
                 </tr>
             </thead>
             <tbody>
-                {waterings.map(w => {
-                    <tr key={w.name}>
-                        <td>{w.next_watering}</td>
-                        <td>Water {w.name} ({w.scientific_name})</td>
-                    </tr>
-                })}
                 {waterArray}
             </tbody>
         </Table>

@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import CloseButton from 'react-bootstrap/CloseButton'
 import { useState } from 'react';
 import AddLog from './AddLog'
+import Form from 'react-bootstrap/Form'
 
 function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant_sci_name, handleDeletePlant, watered, updateWateringInterval}) {
 
@@ -93,16 +94,16 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
                     <Carousel>
                         {logArray}
                     </Carousel>
-                    <Popup trigger={<Button size="sm">Add an update about this plant!</Button>} position="top center" {...{contentStyle}}>
+                    <Popup trigger={<Button variant="success" size="sm">Add an update about this plant!</Button>} position="top center" {...{contentStyle}}>
                         <AddLog handleAddLog={handleAddLog} />
                     </Popup>
                 </Popup> &nbsp;
-                <Popup trigger={<Button variant="outline-success" size="sm">Add watering</Button>} position="top center">
-                    <form onSubmit={handleWatering}>
-                        <label>I watered this plant on: </label>
-                        <input type="date" min={lastWatered} max={new Date().toISOString().slice(0,10)} onChange={e=>setDateWatered(e.target.value)} value={dateWatered} />
-                        <input type="submit" value={'Watered'} />
-                    </form>
+                <Popup trigger={<Button variant="outline-success" size="sm">Water Plant</Button>} position="top center">
+                    <Form onSubmit={handleWatering}>
+                        <Form.Label>I watered this plant on: </Form.Label>
+                        <Form.Control type="date" min={lastWatered} max={new Date().toISOString().slice(0,10)} onChange={e=>setDateWatered(e.target.value)} value={dateWatered} />
+                        <Button variant="success" size="sm" type="submit">Watered</Button>
+                    </Form>
                 </Popup>
             </div>
         </Card>
