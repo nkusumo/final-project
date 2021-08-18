@@ -95,10 +95,51 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   background-color: grey;
   text-align: center;
   height: 50px;
+}
+
+button.material-icons {
+  border: none;
+  background-color: white;
+  width: fit-content;
+  color: grey;
+  margin-left: 85%;
+}
+
+.login {
+  display: block;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.login input {
+  margin: 2px;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.login button {
+  margin-top: 20px
+}
+
+#add-form {
+  border-width: 1px;
+  border-color: black;
+  margin-top: 10px;
+  text-align: left
+}
+
+#form-container {
+  margin-right: auto;
+  margin-left: auto;
+  width: 50%;
+  border-width: 1px;
+  border-color: grey;
 }
 
 /* salmon color rgba(252, 225, 207, 0.555) */

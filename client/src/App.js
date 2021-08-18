@@ -22,11 +22,14 @@ function App() {
       setUser(data)})
   },[])
 
-  if (!user) return <Login onLogin={setUser} />;
+  // if (!user) return <Login onLogin={setUser} />;
 
   return (
     <>
       <Header />
+      {!user ? 
+      <Login onLogin={setUser} />
+      :
       <div className="App">
         <NavBar user={user} setUser={setUser} />
         <main>
@@ -34,15 +37,16 @@ function App() {
             <Route exact path="/">
               <MyPlants user={user} />
             </Route>
-            {/* <Route exact path="/login">
+            <Route exact path="/login">
               <Login onLogin={setUser} />
-            </Route> */}
+            </Route>
             <Route exact path="/calendar">
               <Calendar user={user} />
             </Route>
           </Switch>
         </main>
       </div>
+      }
       <Footer />
     </>
   );

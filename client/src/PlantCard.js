@@ -66,6 +66,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     return(
         <Card className="card">
+            <button class="material-icons" onClick={()=>handleDeletePlant(id)}>delete_outline</button>
             <b>{plant_name}</b>
             <img style={{width: '75%', height: 'auto', marginLeft: 'auto', marginRight: 'auto'}} src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>
@@ -104,8 +105,6 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
                     </form>
                 </Popup>
             </div>
-            <hr/>
-            <Button variant="outline-success" size="sm" style={{marginRight: 'auto', marginLeft: 'auto'}} onClick={()=>handleDeletePlant(id)}>Delete Plant</Button>
         </Card>
     )
 }

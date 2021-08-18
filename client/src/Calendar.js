@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
+import Table from 'react-bootstrap/Table'
 
 function Calendar({user}) {
     document.title = "Plant Parenthood | Calendar"
     
     const [waterings, setWaterings] = useState([])
-    console.log('hello??')
 
     useEffect(() => {
         if (user) {
@@ -16,10 +16,33 @@ function Calendar({user}) {
             })
         }}, [user])
 
+    let waterArray = waterings.map(w => {
+        <tr>
+            <td>{w.next_watering}</td>
+            <td>{w.next_watering}</td>
+            {/* <td>Water {w.name} ({w.scientific_name})</td> */}
+        </tr>
+    })    
+    console.log(waterArray)
+
     return(
-        <>
-        {waterings.map(w => <div>{w.name} ({w.scientific_name}): {w.next_watering}</div>)}
-        </>
+        <Table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>TO DO</th>
+                </tr>
+            </thead>
+            <tbody>
+                {waterings.map(w => {
+                    <tr key={w.name}>
+                        <td>{w.next_watering}</td>
+                        <td>Water {w.name} ({w.scientific_name})</td>
+                    </tr>
+                })}
+                {waterArray}
+            </tbody>
+        </Table>
     )
 }
 
