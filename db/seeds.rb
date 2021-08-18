@@ -11,6 +11,7 @@ Plant.reset_pk_sequence
 User.reset_pk_sequence
 
 puts "seeding users..."
+User.create(name: "Nisa", username: "nis123", password: "1234")
 names = []
 10.times {names.push(Faker::Name.first_name)}
 names.each {|user| User.create(name: user, username: "#{user}#{rand(1..100)}", password: "1234")}
@@ -50,7 +51,7 @@ images = [
     "http://cdn.shopify.com/s/files/1/0150/6262/products/the-sill_zz-plant_variant_medium_grant_mint_1200x.jpg?v=1627303858"
 ]
 (1..9).each do |i|
-    Parenthood.create(user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
+    Parenthood.create(user_id: 1, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
 end
 (1..9).each do |i|
     Parenthood.create(user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])

@@ -32,7 +32,7 @@ function AddPlant({handleAddPlant, setShowForm}) {
                     <Form.Control type="text" placeholder="e.g., fiddle leaf fig" onChange={e => setName(e.target.value)} value={name} />
                 </Form.Group>
                 <Form.Group as={Row}>
-                    <Form.Label column sm={3}>Scientific Name</Form.Label>
+                    <Form.Label >Scientific Name</Form.Label>
                     <Form.Control type="text" placeholder="e.g., Ficus lyrata" onChange={e => setSciName(e.target.value)} value={sciName} />
                 </Form.Group>
                 <Form.Group as={Row}>
@@ -45,12 +45,12 @@ function AddPlant({handleAddPlant, setShowForm}) {
                 </Form.Group>
                 <Form.Group as={Row}>
                     <Form.Label>How often do you want to water this plant?</Form.Label>
+                    <Form.Text>Don't worry, this can be updated later</Form.Text>
                     <Form.Control style={{width: 'fit-content'}} type="button" onClick={() => days > 1 ? setDays(days-1) : null} value={' - '} />
                     <Form.Control type="number" onChange={e => setDays(e.target.value)} value={days} />
                     <Form.Control style={{width: 'fit-content'}} type="button" onClick={() => setDays(days + 1)} value={' + '} /><br/>
-                    <Form.Text>Don't worry, this can be updated later</Form.Text>
                 </Form.Group>
-                <Button style={{marginLeft: 'auto', marginRight: 'auto'}} variant="success" type="submit">Add Plant</Button>
+                <Button variant="outline-success" type="submit">Add Plant</Button>
             </Form>
         </div>
     )

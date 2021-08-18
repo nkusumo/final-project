@@ -47,7 +47,7 @@ main {
 #cards-container {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
 .card {
@@ -64,6 +64,16 @@ main {
 
 .card button {
   width: 40%
+}
+
+.card img {
+  width: 20rem;
+  height: 20rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: auto; 
+  margin-right: auto; 
+  object-fit: cover;
 }
 
 input::-webkit-outer-spin-button,
@@ -102,6 +112,8 @@ input[type="number"] {
   background-color: grey;
   text-align: center;
   height: 50px;
+  background-image: url("https://www.pennington.com/-/media/Images/Pennington2-NA/US/blog/fertilizer/8-Steps-to-Growing-a-Healthy-Indoor-Garden-Anytime/tropical-urban-garden.jpg?h=538&la=en&w=800&hash=EE244B50D804A11720CED7CBDE9AC566B9484F66");
+  background-position: 0% 40%;
 }
 
 button.material-icons {
@@ -129,18 +141,21 @@ button.material-icons {
 }
 
 #add-form {
-  border-width: 1px;
-  border-color: black;
+  width: 50%;
   margin-top: 10px;
-  text-align: left
+  text-align: left;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 10px;
 }
 
 #form-container {
   margin-right: auto;
   margin-left: auto;
-  width: 50%;
-  border-width: 1px;
-  border-color: grey;
+  width: 90%;
+  background-color: rgba(128, 128, 128, 0.13);
+  align-content: center;
+  border-radius: 10px;
 }
 
 .diary-content {
@@ -164,6 +179,32 @@ button.btn.btn-success.btn-sm {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+#form-container label.form-label {
+  margin-top: 10px;
+  margin-bottom: 1px;
+  padding: 0;
+}
+
+#form-container small.form-text {
+  margin-top: -3px;
+  padding-left: 0;
+  margin-bottom: 2px;
+}
+
+#form-container .btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+.delete-alert button {
+  width: 5rem;
+  margin: 5px;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 
 /* salmon color rgba(252, 225, 207, 0.555) */

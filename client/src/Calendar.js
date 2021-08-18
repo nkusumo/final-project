@@ -27,6 +27,7 @@ function Calendar({user}) {
     return(
         <>
         <h1>Water Your Plants!</h1>
+        {waterings.length > 0 ? 
         <Table striped bordered variant="success" style={{width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
             <thead>
                 <tr>
@@ -38,6 +39,9 @@ function Calendar({user}) {
                 {waterArray}
             </tbody>
         </Table>
+        :
+        <div style={{marginLeft: 'auto', marginRight: 'auto', paddingTop: '80px'}}>You have no plants to water!</div>
+        }
         </>
     )
 }

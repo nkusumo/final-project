@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import Popup from 'reactjs-popup';
 import CloseButton from 'react-bootstrap/CloseButton'
 import Form from 'react-bootstrap/Form'
+import Alert from 'react-bootstrap/Alert'
 
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -18,6 +19,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
     const [editDays, setEditDays] = useState(false)
     const [days, setDays] = useState(watering_frequency)
     const [plantLog, setPlantLog] = useState(logs.reverse())
+    const [show, setShow] = useState(false);
     
     let logArray = plantLog.map(log => {
     return(
@@ -76,9 +78,19 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     return(
         <Card className="card">
-            <button class="material-icons" onClick={()=>handleDeletePlant(id)}>delete_outline</button>
+            {/* <Popup trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>}>
+                <b>Are you sure you want to delete this plant?</b>
+                <Button onClick={() => handleDeletePlant(id)} variant="outline-success" size="sm">Yes</Button>
+                <Button variant="outline-success" size="sm">No</Button>
+            </Popup> */}
+            <button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>
+            <Alert className="delete-alert" show={show} variant="secondary">
+                <b>Are you sure you want to delete this plant?</b>
+                <Button onClick={() => handleDeletePlant(id)} variant="outline-success" size="sm">Yes</Button>
+                <Button onClick={() => setShow(false)} variant="outline-success" size="sm">No</Button>
+            </Alert>
             <b>{plant_name}</b>
-            <img style={{width: '20rem', height: '20rem', marginLeft: 'auto', marginRight: 'auto', objectFit: 'cover'}} src={image} alt={plant_name}/>
+            <img src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>
             Last watered: {oldDate}<br/>
             {editDays ? 

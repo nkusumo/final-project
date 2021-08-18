@@ -83,7 +83,9 @@ function MyPlants({user}) {
         <Button variant="outline-success" onClick={()=>setShowForm(!showForm)}>{!showForm ? "Add a plant to my collection" : "Hide form"}</Button>
         {showForm ? <AddPlant handleAddPlant={handleAddPlant} setShowForm={setShowForm} /> : null}
         <div id="cards-container">
-            {plantArray.length > 0 ? plantArray : <div>You have no plants yet!</div>}
+            {plantArray.length > 0 ? plantArray 
+            : <div style={{marginLeft: 'auto', marginRight: 'auto', paddingTop: '80px'}}>You have no plants yet!</div>
+            }
         </div>
         </>
     )
