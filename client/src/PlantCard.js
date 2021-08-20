@@ -48,6 +48,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     function handleSubmit(e) {
         e.preventDefault()
+        // on submit, close popup
         updateWateringInterval(days, id)
         setEditDays(false)
     }
@@ -78,17 +79,20 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     return(
         <Card className="card">
-            {/* <Popup trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>}>
+            <Popup className="delete-alert" trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>} position="bottom right">
                 <b>Are you sure you want to delete this plant?</b>
-                <Button onClick={() => handleDeletePlant(id)} variant="outline-success" size="sm">Yes</Button>
-                <Button variant="outline-success" size="sm">No</Button>
-            </Popup> */}
-            <button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>
+                <br/><div className="delete-btns" style={{display: 'inline-block'}}>
+                <Button onClick={() => handleDeletePlant(id)} variant="success" size="sm">Yes</Button>
+                {/* add onclick close popup */}
+                <Button variant="success" size="sm">No</Button>
+                </div>
+            </Popup>
+            {/* <button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>
             <Alert className="delete-alert" show={show} variant="secondary">
                 <b>Are you sure you want to delete this plant?</b>
                 <Button onClick={() => handleDeletePlant(id)} variant="outline-success" size="sm">Yes</Button>
                 <Button onClick={() => setShow(false)} variant="outline-success" size="sm">No</Button>
-            </Alert>
+            </Alert> */}
             <b>{plant_name}</b>
             <img src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>

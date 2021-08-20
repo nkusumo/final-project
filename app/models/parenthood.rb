@@ -9,4 +9,15 @@ class Parenthood < ApplicationRecord
     return d.to_s
   end
 
+  def due
+    d = self.next_watering.to_date
+    if d < Date.today
+      'overdue'
+    elsif d == Date.today
+      'today'
+    else
+      'ok'
+    end
+  end
+
 end

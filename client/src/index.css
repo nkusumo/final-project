@@ -18,6 +18,7 @@ code {
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  height: 100%;
 }
   
 main { 
@@ -205,6 +206,22 @@ button.btn.btn-success.btn-sm {
   margin: 5px;
   margin-bottom: 0;
   font-weight: bold;
+}
+
+/* .delete-alert-content {
+  width: 16rem;
+  background-color: green;
+} */
+
+div#popup-2 {
+  width: 16rem;
+  background-color: grey;
+}
+
+.delete-btns {
+  /* display: inline-block; */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* salmon color rgba(252, 225, 207, 0.555) */
