@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "/current_user", to: "sessions#user"
   get "/users/:id/plants", to: "users#my_plants"
   get "users/:id/waterings", to: "users#my_waterings"
+  post 'rails/active_storage/direct_uploads', to: 'direct_uploads#create'
+  put '/parenthoods/:id/attach_image', to: 'parenthoods#add_image'
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

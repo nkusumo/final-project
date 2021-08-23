@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+// import { DirectUpload } from 'activestorage';
 
 function AddPlant({handleAddPlant, setShowForm}) {
 
     const [name, setName] = useState('')
     const [sciName, setSciName] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState({})
     const [date, setDate] = useState('')
     const [days, setDays] = useState(7)
 
     function handleSubmit(e) {
         e.preventDefault()
-        let plantObj = {plant_name: name, date: date, watering_frequency: days, image: image, plant_sci_name: sciName}
-        handleAddPlant(plantObj)
+        let plantObj = {plant_name: name, date: date, watering_frequency: days, plant_sci_name: sciName}
+        // console.log(plantObj)
+        // console.log(image.files[0])
+        // console.log(image)
+        handleAddPlant(plantObj, image)
         setName('')
         setSciName('')
         setImage('')
@@ -23,6 +26,8 @@ function AddPlant({handleAddPlant, setShowForm}) {
         setDays(7)
         setShowForm(false)
     }
+
+    // console.log(image.files[0])
 
     return(
         <div id="form-container">
@@ -35,10 +40,14 @@ function AddPlant({handleAddPlant, setShowForm}) {
                     <Form.Label >Scientific Name</Form.Label>
                     <Form.Control type="text" placeholder="e.g., Ficus lyrata" onChange={e => setSciName(e.target.value)} value={sciName} />
                 </Form.Group>
-                <Form.Group as={Row}>
+                <Form.Group>
+                    <Form.Label>Plant Image</Form.Label>
+                    <Form.Control type="file" onChange={e => setImage(e.target.files[0])}/>
+                </Form.Group>
+                {/* <Form.Group as={Row}>
                     <Form.Label>Image URL</Form.Label>
                     <Form.Control type="text" onChange={e => setImage(e.target.value)} value={image}  />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group as={Row}>
                     <Form.Label>When was the last time you watered this plant?</Form.Label>
                     <Form.Control type="date" max={new Date().toISOString().slice(0,10)} onChange={e => setDate(e.target.value)} value={date}  />

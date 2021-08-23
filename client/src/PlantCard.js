@@ -79,9 +79,10 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     return(
         <Card className="card">
-            <Popup className="delete-alert" trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>} position="bottom right">
+            <Popup className="delete-alert" trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>} position="left top">
                 <b>Are you sure you want to delete this plant?</b>
-                <br/><div className="delete-btns" style={{display: 'inline-block'}}>
+                <br/>
+                <div className="delete-btns" style={{display: 'inline-block'}}>
                 <Button onClick={() => handleDeletePlant(id)} variant="success" size="sm">Yes</Button>
                 {/* add onclick close popup */}
                 <Button variant="success" size="sm">No</Button>

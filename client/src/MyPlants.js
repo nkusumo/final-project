@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import AddPlant from './AddPlant'
 import PlantCard from './PlantCard'
 import Button from 'react-bootstrap/Button'
+import { DirectUpload } from 'activestorage'
 
 function MyPlants({user}) {
     document.title = "Plant Parenthood | My Plants"
@@ -18,7 +19,7 @@ function MyPlants({user}) {
         }
     },[user])
 
-    function handleAddPlant(plant) {
+    function handleAddPlant(plant, imageObj) {
         console.log(plant)
         plant.user_id = user.id
         console.log(plant)
@@ -33,10 +34,35 @@ function MyPlants({user}) {
         .then(data => {
             console.log(data)
             if (data.id) {
-                let updatedArray = [data, ...myPlants]
-                setMyPlants(updatedArray)
+                uploadFile(imageObj, data)
+                // let updatedArray = [data, ...myPlants]
+                // setMyPlants(updatedArray)
             } else {
-                alert(data.errors)
+                alert(data.errors.full_messages)
+            }
+        })
+    }
+
+    function uploadFile(file, parenthood) {
+        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        upload.create((error, blob) => {
+            if (error) {
+                console.log(error)
+            } else {
+                fetch(`http://localhost:3000/parenthoods/${parenthood.id}/attach_image`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({plant_image: blob.signed_id})
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    let updatedArray = [data, ...myPlants]
+                    setMyPlants(updatedArray)
+                })
             }
         })
     }

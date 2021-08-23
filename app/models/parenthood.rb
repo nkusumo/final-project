@@ -1,6 +1,7 @@
 class Parenthood < ApplicationRecord
   belongs_to :user
   has_many :logs, dependent: :destroy
+  has_one_attached :plant_image
   
   validates :plant_name, :date, presence: true
 

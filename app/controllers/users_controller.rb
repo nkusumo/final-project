@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     def my_plants
         user = User.find(params[:id])
         user_plants = user.parenthoods
+        # byebug
         render json: user_plants
     end
 

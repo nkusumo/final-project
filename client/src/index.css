@@ -208,18 +208,13 @@ button.btn.btn-success.btn-sm {
   font-weight: bold;
 }
 
-/* .delete-alert-content {
+#popup-root div.delete-alert-content {
   width: 16rem;
-  background-color: green;
-} */
-
-div#popup-2 {
-  width: 16rem;
-  background-color: grey;
+  background-color: rgb(113, 126, 113);
 }
 
-.delete-btns {
-  /* display: inline-block; */
+#popup-root div.delete-alert-content.delete-btns {
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
 }
