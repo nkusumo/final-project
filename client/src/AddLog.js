@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button'
 function AddLog({handleAddLog}) {
 
     const [description, setDescription] = useState('')
+    const [image, setImage] = useState({})
     const [date, setDate] = useState('')
     // add photo upload
 
     function handleSubmit(e) {
         e.preventDefault()
-        handleAddLog(description, date)
+        handleAddLog(description, date, image)
     }
 
     return(
@@ -23,6 +24,10 @@ function AddLog({handleAddLog}) {
                 <Form.Label>Description</Form.Label>
                 <Form.Control as="textarea" onChange={e => setDescription(e.target.value)} value={description} placeholder="Plant updates" />
             </Form.Group>
+            <Form.Group>
+                    <Form.Label>Plant Image</Form.Label>
+                    <Form.Control type="file" onChange={e => setImage(e.target.files[0])}/>
+                </Form.Group>
             <Button variant="success" type="submit">Add Update</Button>
         </Form>
     )

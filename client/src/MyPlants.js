@@ -20,9 +20,9 @@ function MyPlants({user}) {
     },[user])
 
     function handleAddPlant(plant, imageObj) {
-        console.log(plant)
+        // console.log(plant)
         plant.user_id = user.id
-        console.log(plant)
+        // console.log(plant)
         fetch('http://localhost:3000/parenthoods', {
             method: "POST",
             headers: {

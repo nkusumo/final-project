@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DirectUpload } from 'activestorage'
 import AddLog from './AddLog'
 
 import Card from 'react-bootstrap/Card'
@@ -6,7 +7,6 @@ import Button from 'react-bootstrap/Button'
 import Popup from 'reactjs-popup';
 import CloseButton from 'react-bootstrap/CloseButton'
 import Form from 'react-bootstrap/Form'
-import Alert from 'react-bootstrap/Alert'
 
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -24,12 +24,12 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
     let logArray = plantLog.map(log => {
     return(
         <>
+        <img src={log.image} alt={log.date} />
         <h3>{log.date}</h3>
         <h5>Description:</h5>
         <p>{log.description}</p>
         </>
     )})
-    console.log(plantLog.reverse())
     
     let oldDate = new Date(lastWatered.split("-")).toLocaleDateString()
     
@@ -53,7 +53,23 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         setEditDays(false)
     }
 
-    function handleAddLog(description, date) {
+    // function handleAddLog(description, date) {
+    //     let logObj = {description: description, date: date, parenthood_id: id}
+    //     fetch('http://localhost:3000/logs', {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(logObj)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //         let updatedArray = [...plantLog, data]
+    //         setPlantLog(updatedArray)
+    //     })
+    // }
+    function handleAddLog(description, date, imageObj) {
         let logObj = {description: description, date: date, parenthood_id: id}
         fetch('http://localhost:3000/logs', {
             method: "POST",
@@ -65,8 +81,37 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            let updatedArray = [...plantLog, data]
-            setPlantLog(updatedArray)
+            if (data.id) {
+                uploadFile(imageObj, data)
+                // let updatedArray = [...plantLog, data]
+                // setPlantLog(updatedArray)
+            } else {
+                alert(data.errors)
+            }
+        })
+    }
+
+    function uploadFile(file, log) {
+        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        upload.create((error, blob) => {
+            if (error) {
+                console.log(error)
+            } else {
+                fetch(`http://localhost:3000/logs/${log.id}/attach_image`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({plant_image: blob.signed_id})
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    let updatedArray = [data, ...plantLog]
+                    setPlantLog(updatedArray)
+                })
+            }
         })
     }
 
