@@ -16,8 +16,6 @@ function Calendar({user}) {
             })
         }}, [user])
 
-        console.log(waterings)
-
     let waterArray = waterings.map(w => {
         if (w.due == "overdue") {
             return(
@@ -47,7 +45,8 @@ function Calendar({user}) {
         <>
         <h1>Water Your Plants!</h1>
         {waterings.length > 0 ? 
-        <Table bordered style={{width: '90%', marginLeft: 'auto', marginRight: 'auto'}}>
+        <div>
+        <Table id="water-table" bordered style={{width: '90%', marginLeft: 'auto', marginRight: 'auto', borderWidth: '2px'}}>
             <thead>
                 <tr>
                     <th>Day</th>
@@ -58,6 +57,16 @@ function Calendar({user}) {
                 {waterArray}
             </tbody>
         </Table>
+        <hr/>
+        <Table bordered style={{width: 'auto', marginLeft: 'auto', marginRight: 'auto'}}>
+            <tr>
+                <td style={{width: '100px', borderWidth: '1px'}}><b><small>Legend</small></b></td>
+                <td style={{borderColor: 'red', borderWidth: '3px', backgroundColor: 'pink', padding: '5px'}}><small>This plant needed to be watered!</small></td>
+                <td style={{borderColor: 'green', borderWidth: '3px', backgroundColor: '#34871952', padding: '5px'}}><small>Water this plant today :)</small></td>
+                <td style={{borderColor: 'lightgrey', borderWidth: '1px', padding: '5px'}}><small>This plant is ok!</small></td>
+            </tr>
+        </Table>
+        </div>
         :
         <div style={{marginLeft: 'auto', marginRight: 'auto', paddingTop: '80px'}}>You have no plants to water!</div>
         }

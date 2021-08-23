@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     def my_waterings
         user = User.find(params[:id])
-        waterings = user.my_waterings.sort_by {|w| w[:next_watering]}
+        waterings = user.my_waterings.sort_by {|w| w[:date]}
         render json: waterings
     end
 

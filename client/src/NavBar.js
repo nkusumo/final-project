@@ -22,7 +22,7 @@ function NavBar({user, setUser}) {
         <div id="nav">
             Hi, {user.name}!<br/><br/>
             <Link to="/">My Plants</Link><br/><br/>
-            <Link to="calendar">Calendar</Link><br/><br/>
+            <Link to="calendar">To Dew List</Link><br/><br/>
             <Button variant="outline-success" onClick={handleLogout}>Logout</Button><br/>
         </div>
     )

@@ -210,13 +210,18 @@ button.btn.btn-success.btn-sm {
 
 #popup-root div.delete-alert-content {
   width: 16rem;
-  background-color: rgb(113, 126, 113);
+  background-color: whitesmoke;
 }
 
-#popup-root div.delete-alert-content.delete-btns {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
+#water-table tr {
+  height: 50px;
+  vertical-align: middle;
+}
+
+#water-table {
+  box-shadow: 10px 10px 10px rgba(6, 87, 6, 0.2);
+  border-width: 2px;
+  border-color: black;
 }
 
 /* salmon color rgba(252, 225, 207, 0.555) */

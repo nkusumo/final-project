@@ -80,7 +80,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if (data.id) {
                 uploadFile(imageObj, data)
                 // let updatedArray = [...plantLog, data]
@@ -124,22 +124,11 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
 
     return(
         <Card className="card">
-            <Popup className="delete-alert" trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>} position="left top">
+            <Popup open={show} className="delete-alert" trigger={<button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>} position="left top">
                 <b>Are you sure you want to delete this plant?</b>
-                <br/>
-                <div className="delete-btns" style={{display: 'inline-block'}}>
-                <Button onClick={() => handleDeletePlant(id)} variant="success" size="sm">Yes</Button>
-                {/* add onclick close popup */}
-                <Button variant="success" size="sm">No</Button>
-                </div>
+                <Button onClick={() => handleDeletePlant(id)} variant="success" size="sm" style={{width: '100px'}}>Yes</Button>
             </Popup>
-            {/* <button class="material-icons" onClick={()=>setShow(!show)}>delete_outline</button>
-            <Alert className="delete-alert" show={show} variant="secondary">
-                <b>Are you sure you want to delete this plant?</b>
-                <Button onClick={() => handleDeletePlant(id)} variant="outline-success" size="sm">Yes</Button>
-                <Button onClick={() => setShow(false)} variant="outline-success" size="sm">No</Button>
-            </Alert> */}
-            <b>{plant_name}</b>
+            <h4>{plant_name}</h4>
             <img src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>
             Last watered: {oldDate}<br/>
