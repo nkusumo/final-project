@@ -24,8 +24,7 @@ function MyPlants({user, watered}) {
 
     function handleAddPlant(plant, imageObj) {
         plant.user_id = user.id
-        // this fetch is not working
-        fetch(`/parenthoods`, {
+        fetch('/parenthoods', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

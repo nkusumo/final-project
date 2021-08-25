@@ -11,16 +11,10 @@ function Calendar({user, watered, updateCalendar}) {
         if (user) {
             fetch(`/users/${user.id}/waterings`)
             .then(res => res.json())
-            .then(data => {
-                console.log("TEST",data)
-                setWaterings(data)
-            })
+            .then(data => setWaterings(data))
         }}, [user, updateCalendar])
 
-    console.log(updateCalendar)
-    console.log(waterings)
-
-    let waterArray = waterings.map(w => <DewListItem watered={watered} {...w} />)
+    let waterArray = waterings.map(w => <DewListItem key={w.name} watered={watered} {...w} />)
 
     return(
         <>
@@ -40,12 +34,14 @@ function Calendar({user, watered, updateCalendar}) {
         </Table>
         <hr/>
         <Table bordered style={{width: 'auto', marginLeft: 'auto', marginRight: 'auto'}}>
-            <tr>
-                <td style={{width: '100px', borderWidth: '1px'}}><b><small>Legend</small></b></td>
-                <td style={{borderColor: 'red', borderWidth: '3px', backgroundColor: 'pink', padding: '5px'}}><small>This plant needed to be watered!</small></td>
-                <td style={{borderColor: 'green', borderWidth: '3px', backgroundColor: '#34871952', padding: '5px'}}><small>Water this plant today :)</small></td>
-                <td style={{borderColor: 'lightgrey', borderWidth: '1px', padding: '5px'}}><small>This plant is ok!</small></td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td style={{width: '100px', borderWidth: '1px'}}><b><small>Legend</small></b></td>
+                    <td style={{borderColor: 'red', borderWidth: '3px', backgroundColor: 'pink', padding: '5px'}}><small>This plant needed to be watered!</small></td>
+                    <td style={{borderColor: 'green', borderWidth: '3px', backgroundColor: '#34871952', padding: '5px'}}><small>Water this plant today :)</small></td>
+                    <td style={{borderColor: 'lightgrey', borderWidth: '1px', padding: '5px'}}><small>This plant is ok!</small></td>
+                </tr>
+            </tbody>
         </Table>
         </div>
         :
