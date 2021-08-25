@@ -15,6 +15,7 @@ function Calendar({user, watered, updateCalendar}) {
         }}, [user, updateCalendar])
 
     let waterArray = waterings.map(w => <DewListItem key={w.name} watered={watered} {...w} />)
+    console.log(waterings)
 
     return(
         <>
@@ -37,9 +38,9 @@ function Calendar({user, watered, updateCalendar}) {
             <tbody>
                 <tr>
                     <td style={{width: '100px', borderWidth: '1px'}}><b><small>Legend</small></b></td>
-                    <td style={{borderColor: 'red', borderWidth: '3px', backgroundColor: 'pink', padding: '5px'}}><small>This plant needed to be watered!</small></td>
-                    <td style={{borderColor: 'green', borderWidth: '3px', backgroundColor: '#34871952', padding: '5px'}}><small>Water this plant today :)</small></td>
-                    <td style={{borderColor: 'lightgrey', borderWidth: '1px', padding: '5px'}}><small>This plant is ok!</small></td>
+                    <td style={{borderColor: 'red', borderWidth: '2px', backgroundColor: 'pink', padding: '5px'}}><small>This plant needed to be watered!</small></td>
+                    <td style={{borderColor: 'rgb(199, 199, 73)', borderWidth: '2px', backgroundColor: 'rgba(247, 247, 178, 0.5)', padding: '5px'}}><small>Water this plant today!</small></td>
+                    <td style={{borderColor: 'green', borderWidth: '2px', backgroundColor: '#34871952',padding: '5px'}}><small>This plant is ok :)</small></td>
                 </tr>
             </tbody>
         </Table>

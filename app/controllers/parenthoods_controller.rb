@@ -29,7 +29,6 @@ class ParenthoodsController < ApplicationController
         parenthood.update(plant_image: params[:plant_image])
         image_url = rails_blob_path(parenthood.plant_image)
         parenthood.update(image: image_url)
-        # render json: {parenthood: parenthood, image_url: image_url}
         render json: parenthood
     end
 
@@ -42,7 +41,6 @@ class ParenthoodsController < ApplicationController
     private
 
     def parenthood_params
-        # params.permit(:date, :image, :plant_name, :plant_sci_name, :user_id, :watering_frequency)
         params.permit(:date, :plant_name, :plant_sci_name, :user_id, :watering_frequency)
     end
 

@@ -45,9 +45,10 @@ function AddPlant({handleAddPlant, setShowForm}) {
                 <Form.Group as={Row}>
                     <Form.Label>How often do you want to water this plant?</Form.Label>
                     <Form.Text>Don't worry, this can be updated later</Form.Text>
+                    Every&nbsp;&nbsp;&nbsp;
                     <Form.Control style={{width: 'fit-content'}} type="button" onClick={() => days > 1 ? setDays(days-1) : null} value={' - '} />
                     <Form.Control type="number" onChange={e => setDays(e.target.value)} value={days} />
-                    <Form.Control style={{width: 'fit-content'}} type="button" onClick={() => setDays(days + 1)} value={' + '} /><br/>
+                    <Form.Control style={{width: 'fit-content'}} type="button" onClick={() => setDays(days + 1)} value={' + '} />&nbsp;&nbsp;&nbsp;days<br/>
                 </Form.Group>
                 <Button variant="outline-success" type="submit">Add Plant</Button>
             </Form>

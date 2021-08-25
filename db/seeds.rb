@@ -58,6 +58,12 @@ end
 end
 
 puts "seeding logs..."
-20.times do
+(1..9).each do |i|
+    Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: i, image: images[i-1])
+end
+(1..9).each do |i|
+    Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: i, image: images[i-1])
+end
+10.times do
     Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: Parenthood.ids.sample)
 end

@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.login {
+  height: 70vh;
+}
+
 .App { 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -26,13 +30,16 @@ main {
   background-color: white;
   height: 100vh;
   padding-top: 1rem;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  overflow-y: scroll;
 }
 
 #nav { 
   grid-area: 1 / 1 / 2 / 2; 
   padding-top: 4rem;
   background-color: rgba(0, 128, 0, 0.1);
-  height: 100vh;
+  height: 100%;
 }
 
 #nav a {
@@ -49,8 +56,8 @@ main {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 100px;
+  padding-bottom: 50px;
   height: 100vh;
-  overflow-y: scroll;
 }
 
 .card {
@@ -109,7 +116,7 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: static;
   bottom: 0;
   width: 100%;
   background-color: grey;
@@ -207,12 +214,13 @@ button.btn.btn-success.btn-sm {
 #water-table tr {
   height: 50px;
   vertical-align: middle;
+  border-width: 2px;
 }
 
 #water-table {
   box-shadow: 10px 10px 10px rgba(6, 87, 6, 0.2);
   border-width: 2px;
-  border-color: black;
+  border-color: lightgrey;
 }
 
 tr.overdue {
@@ -222,6 +230,12 @@ tr.overdue {
 }
 
 tr.today {
+  border-color: rgb(199, 199, 73);
+  border-width: 5px;
+  background-color: rgba(247, 247, 178, 0.5);
+}
+
+tr.ok {
   border-color: green;
   border-width: 3px;
   background-color: #34871952;
