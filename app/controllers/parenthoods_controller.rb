@@ -13,13 +13,8 @@ class ParenthoodsController < ApplicationController
         render json: {parenthood: parenthood, plant_image: plant_image}
     end
 
-    # def create
-    #     parenthood = Parenthood.create!(parenthood_params)
-    #     render json: parenthood, status: :created
-    # end
     def create
         parenthood = Parenthood.create!(parenthood_params)
-        # parenthood.plant_image.attach(params[:image])
         render json: parenthood, status: :created
     end
 

@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   
   resources :logs, only: [:index, :create]
   resources :parenthoods
-  resources :plants
+  # resources :plants
   resources :users, only: [:create, :show]
 
+  post "/new_plant", to: "parenthoods#create"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  # get "/current_user", to: "users#show"
   get "/current_user", to: "sessions#user"
   get "/users/:id/plants", to: "users#my_plants"
   get "users/:id/waterings", to: "users#my_waterings"

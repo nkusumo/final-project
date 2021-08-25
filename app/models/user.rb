@@ -11,6 +11,7 @@ class User < ApplicationRecord
             {
                 name: p.plant_name,
                 scientific_name: p.plant_sci_name,
+                last_watered: p.date,
                 date: p.next_watering,
                 next_watering: Date.parse(p.next_watering).strftime("%A, %b %d, %Y"),
                 due: p.due,

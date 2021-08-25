@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { DirectUpload } from 'activestorage'
 import AddLog from './AddLog'
+import WateringPopup from './WateringPopup'
 
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
@@ -8,13 +9,13 @@ import Popup from 'reactjs-popup';
 import CloseButton from 'react-bootstrap/CloseButton'
 import Form from 'react-bootstrap/Form'
 
+// import Carousel from 'react-bootstrap/Carousel'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import 'reactjs-popup/dist/index.css';
 
 function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant_sci_name, handleDeletePlant, watered, updateWateringInterval}) {
 
-    const [dateWatered, setDateWatered] = useState('')
     const [lastWatered, setLastWatered] = useState(date)
     const [editDays, setEditDays] = useState(false)
     const [days, setDays] = useState(watering_frequency)
@@ -23,12 +24,16 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
     
     let logArray = plantLog.map(log => {
     return(
-        <>
-        <img src={log.image} alt={log.date} />
-        <h3>{log.date}</h3>
-        <h5>Description:</h5>
-        <p>{log.description}</p>
-        </>
+        // <Carousel.Item classname="plant-log-slide">
+            <div>
+            <img className="carousel-img" src={log.image} alt={log.date} />
+            {/* <Carousel.Caption> */}
+            <h3>{log.date}</h3>
+            <h5>Description:</h5>
+            <p>{log.description}</p>
+            {/* </Carousel.Caption> */}
+            </div>
+        // </Carousel.Item>
     )})
     
     let oldDate = new Date(lastWatered.split("-")).toLocaleDateString()
@@ -40,38 +45,15 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         return test.toLocaleDateString()
     }
 
-    function handleWatering(e) {
-        e.preventDefault()
-        watered(dateWatered, id)
-        setLastWatered(dateWatered)
-    }
-
     function handleSubmit(e) {
         e.preventDefault()
-        // on submit, close popup
         updateWateringInterval(days, id)
         setEditDays(false)
     }
 
-    // function handleAddLog(description, date) {
-    //     let logObj = {description: description, date: date, parenthood_id: id}
-    //     fetch('http://localhost:3000/logs', {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(logObj)
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         let updatedArray = [...plantLog, data]
-    //         setPlantLog(updatedArray)
-    //     })
-    // }
     function handleAddLog(description, date, imageObj) {
         let logObj = {description: description, date: date, parenthood_id: id}
-        fetch('http://localhost:3000/logs', {
+        fetch('/logs', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -80,11 +62,8 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
         })
         .then(res => res.json())
         .then(data => {
-            // console.log(data)
             if (data.id) {
                 uploadFile(imageObj, data)
-                // let updatedArray = [...plantLog, data]
-                // setPlantLog(updatedArray)
             } else {
                 alert(data.errors)
             }
@@ -92,12 +71,12 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
     }
 
     function uploadFile(file, log) {
-        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        const upload = new DirectUpload(file, 'rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
             if (error) {
                 console.log(error)
             } else {
-                fetch(`http://localhost:3000/logs/${log.id}/attach_image`, {
+                fetch(`/logs/${log.id}/attach_image`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -151,20 +130,14 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
             Water again on: {newDate(lastWatered, days)}<br/>
             <div style={{display: 'inline-block'}}>
                 <Popup classname="diary" trigger={<Button variant="outline-success" size="sm">Plant Diary</Button>} modal nested>
-                    <Carousel>
+                    <Carousel centerMode="true">
                         {logArray}
                     </Carousel>
                     <Popup trigger={<Button variant="success" size="sm">Add an update about this plant!</Button>} position="top center" {...{contentStyle}}>
                         <AddLog handleAddLog={handleAddLog} />
                     </Popup>
                 </Popup> &nbsp;
-                <Popup trigger={<Button variant="outline-success" size="sm">Water Plant</Button>} position="top center">
-                    <Form onSubmit={handleWatering}>
-                        <Form.Label>I watered this plant on: </Form.Label>
-                        <Form.Control type="date" min={lastWatered} max={new Date().toISOString().slice(0,10)} onChange={e=>setDateWatered(e.target.value)} value={dateWatered} />
-                        <Button variant="success" size="sm" type="submit">Watered</Button>
-                    </Form>
-                </Popup>
+                <WateringPopup last_watered={lastWatered} watered={watered} parenthood_id={id} setLastWatered={setLastWatered} />
             </div>
         </Card>
     )

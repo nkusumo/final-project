@@ -4,7 +4,7 @@ import PlantCard from './PlantCard'
 import Button from 'react-bootstrap/Button'
 import { DirectUpload } from 'activestorage'
 
-function MyPlants({user}) {
+function MyPlants({user, watered}) {
     document.title = "Plant Parenthood | My Plants"
 
     const [myPlants, setMyPlants] = useState([])
@@ -13,17 +13,19 @@ function MyPlants({user}) {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:3000/users/${user.id}/plants`)
+            fetch(`/users/${user.id}/plants`)
             .then(res => res.json())
-            .then(data => setMyPlants(data.reverse()))
+            .then(data => {
+                // console.log(data)
+                setMyPlants(data.reverse())
+            })
         }
     },[user])
 
     function handleAddPlant(plant, imageObj) {
-        // console.log(plant)
         plant.user_id = user.id
-        // console.log(plant)
-        fetch('http://localhost:3000/parenthoods', {
+        // this fetch is not working
+        fetch(`/parenthoods`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -35,8 +37,6 @@ function MyPlants({user}) {
             console.log(data)
             if (data.id) {
                 uploadFile(imageObj, data)
-                // let updatedArray = [data, ...myPlants]
-                // setMyPlants(updatedArray)
             } else {
                 alert(data.errors.full_messages)
             }
@@ -44,12 +44,12 @@ function MyPlants({user}) {
     }
 
     function uploadFile(file, parenthood) {
-        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        const upload = new DirectUpload(file, '/rails/active_storage/direct_uploads')
         upload.create((error, blob) => {
             if (error) {
                 console.log(error)
             } else {
-                fetch(`http://localhost:3000/parenthoods/${parenthood.id}/attach_image`, {
+                fetch(`/parenthoods/${parenthood.id}/attach_image`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function MyPlants({user}) {
     }
 
     function handleDeletePlant(plant_id) {
-        fetch(`http://localhost:3000/parenthoods/${plant_id}`, {
+        fetch(`/parenthoods/${plant_id}`, {
             method: "DELETE"
         })
         .then(() => {
@@ -76,21 +76,10 @@ function MyPlants({user}) {
             setMyPlants(updatedArray)
         })
     }
-    
-    function watered(date, plant_id) {
-        fetch(`http://localhost:3000/parenthoods/${plant_id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({date: date})
-        })
-        .then(res => res.json())
-        .then(console.log) // update myPlants --> does this need to be here???
-    }
+
 
     function updateWateringInterval(days, plant_id) {
-        fetch(`http://localhost:3000/parenthoods/${plant_id}`, {
+        fetch(`/parenthoods/${plant_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

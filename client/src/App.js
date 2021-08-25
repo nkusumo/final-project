@@ -10,9 +10,9 @@ import Footer from './Footer';
 
 function App() {
 
-  // let testUser = {}
-  // const [user, setUser] = useState({id: 4, name: "Delana", username: "Delana26"});
   const [user, setUser] = useState(null);
+  const [updateCalendar, setUpdateCalendar] = useState(0)
+
 
   useEffect(() => {
     fetch("/current_user")
@@ -21,6 +21,22 @@ function App() {
       console.log(data)
       setUser(data)})
   },[])
+
+      
+  function watered(date, plant_id) {
+    fetch(`/parenthoods/${plant_id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({date: date})
+    })
+    .then(res => res.json())
+    .then(data => {
+      setUpdateCalendar(prevState => prevState + 1)
+
+    })
+}
 
   // if (!user) return <Login onLogin={setUser} />;
 
@@ -35,13 +51,13 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <MyPlants user={user} />
+              <MyPlants user={user} watered={watered}/>
             </Route>
             <Route exact path="/login">
               <Login onLogin={setUser} />
             </Route>
             <Route exact path="/calendar">
-              <Calendar user={user} />
+              <Calendar user={user} watered={watered} updateCalendar={updateCalendar} />
             </Route>
           </Switch>
         </main>

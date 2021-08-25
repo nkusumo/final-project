@@ -1,45 +1,26 @@
-import { useState, useEffect } from 'react'
-import Table from 'react-bootstrap/Table'
+import { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
+import DewListItem from './DewListItem';
 
-function Calendar({user}) {
+function Calendar({user, watered, updateCalendar}) {
     document.title = "Plant Parenthood | Calendar"
     
     const [waterings, setWaterings] = useState([])
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:3000/users/${user.id}/waterings`)
+            fetch(`/users/${user.id}/waterings`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                console.log("TEST",data)
                 setWaterings(data)
             })
-        }}, [user])
+        }}, [user, updateCalendar])
 
-    let waterArray = waterings.map(w => {
-        if (w.due == "overdue") {
-            return(
-                <tr style={{borderColor: 'red', borderWidth: '3px', backgroundColor: 'pink'}}>
-                    <td>{w.next_watering}</td>
-                    <td>Water {w.name} <small><em>({w.scientific_name})</em></small></td>
-                </tr>
-            )
-        } else if (w.due == "today") {
-            return(
-                <tr style={{borderColor: 'green', borderWidth: '3px', backgroundColor: '#34871952'}}>
-                    <td>{w.next_watering}</td>
-                    <td>Water {w.name} <small><em>({w.scientific_name})</em></small></td>
-                </tr>
-            )
-        } else {
-            return(
-                <tr>
-                    <td>{w.next_watering}</td>
-                    <td>Water {w.name} <small><em>({w.scientific_name})</em></small></td>
-                </tr>
-            )
-        }    
-    })    
+    console.log(updateCalendar)
+    console.log(waterings)
+
+    let waterArray = waterings.map(w => <DewListItem watered={watered} {...w} />)
 
     return(
         <>
