@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+
 
 function Login({onLogin}) {
     document.title = "Plant Parenthood | Login"
@@ -94,8 +96,8 @@ function Login({onLogin}) {
         <div style={{marginTop: "20px", color: "red"}}>{errors.map(err => <p key={err}>{err}</p>)}</div>
         <div>
             <br/>
-            Already have an account?
-            <Button variant="success" onClick={switchToSignup}>Login here</Button>
+            <label>Already have an account?</label>
+            <Button style={{margin: '0'}} variant="success" onClick={switchToSignup}>Login here</Button>
         </div>
         </>
         : 
@@ -107,10 +109,10 @@ function Login({onLogin}) {
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/><br/>
             <Button variant="success" type="submit">Login</Button>
         </form>
-        <div>{errors.map(err => <p key={err}>{err}</p>)}</div>
-        <div style={{verticalAlign: 'middle'}}>
+        <div style={{marginTop: "20px", color: "red"}}>{errors.map(err => <p key={err}>{err}</p>)}</div>
+        <div style={{display: 'inline-block', verticalAlign: 'middle', height: 'fit-content'}}>
             <label>Don't have an account?</label>
-            <Button variant="success" onClick={switchToLogin}>Sign up here</Button>
+            <Button style={{margin: '0'}} variant="success" onClick={switchToLogin}>Sign up here</Button>
         </div>
         </>
         }

@@ -54,7 +54,7 @@ images = [
     Parenthood.create(user_id: 1, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
 end
 (1..9).each do |i|
-    Parenthood.create(user_id: User.ids.sample, date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
+    Parenthood.create(user_id: rand(2..10), date: Faker::Date.between(from: 1.year.ago, to: Date.today), watering_frequency: rand(4..30), image: images[i-1], plant_name: plants[i-1][:name], plant_sci_name: plants[i-1][:scientific_name])
 end
 
 puts "seeding logs..."
@@ -65,5 +65,5 @@ end
     Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: i, image: images[i-1])
 end
 10.times do
-    Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: Parenthood.ids.sample)
+    Log.create(description: "so much growth!", date: Faker::Date.between(from: 1.year.ago, to: Date.today), parenthood_id: rand(10..18))
 end

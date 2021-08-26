@@ -15,7 +15,7 @@ function AddLog({handleAddLog}) {
     }
 
     return(
-        <Form onSubmit={handleSubmit}>
+        <Form className="add-log-form" onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Date</Form.Label>
                 <Form.Control type="date" max={new Date().toISOString().slice(0,10)} onChange={e => setDate(e.target.value)} value={date} />
@@ -25,10 +25,10 @@ function AddLog({handleAddLog}) {
                 <Form.Control as="textarea" onChange={e => setDescription(e.target.value)} value={description} placeholder="Plant updates" />
             </Form.Group>
             <Form.Group>
-                    <Form.Label>Plant Image</Form.Label>
-                    <Form.Control type="file" onChange={e => setImage(e.target.files[0])}/>
-                </Form.Group>
-            <Button variant="success" type="submit">Add Update</Button>
+                <Form.Label>Plant Image</Form.Label>
+                <Form.Control type="file" onChange={e => setImage(e.target.files[0])}/>
+            </Form.Group>
+            <Button variant="success" type="submit" style={{marginTop: '10px'}}>Add Update</Button>
         </Form>
     )
 }
