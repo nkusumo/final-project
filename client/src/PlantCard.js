@@ -1,39 +1,39 @@
 import { useState } from 'react';
-import { DirectUpload } from 'activestorage'
-import AddLog from './AddLog'
-import WateringPopup from './WateringPopup'
+import { DirectUpload } from 'activestorage';
+import AddLog from './AddLog';
+import WateringPopup from './WateringPopup';
 
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
-import CloseButton from 'react-bootstrap/CloseButton'
-import Form from 'react-bootstrap/Form'
+import CloseButton from 'react-bootstrap/CloseButton';
 
-// import Carousel from 'react-bootstrap/Carousel'
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Carousel from 'react-bootstrap/Carousel';
+// import { Carousel } from 'react-responsive-carousel';
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 import 'reactjs-popup/dist/index.css';
 
 function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant_sci_name, handleDeletePlant, watered, updateWateringInterval}) {
 
-    const [lastWatered, setLastWatered] = useState(date)
-    const [editDays, setEditDays] = useState(false)
-    const [days, setDays] = useState(watering_frequency)
-    const [plantLog, setPlantLog] = useState(logs.reverse())
+    const [lastWatered, setLastWatered] = useState(date);
+    const [editDays, setEditDays] = useState(false);
+    const [days, setDays] = useState(watering_frequency);
+    const [plantLog, setPlantLog] = useState(logs.reverse());
     const [show, setShow] = useState(false);
+    const [carouselIndex, setCarouselIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => setCarouselIndex(selectedIndex);
     
     let logArray = plantLog.map(log => {
     return(
-        // <Carousel.Item classname="plant-log-slide">
-            <div>
+        <Carousel.Item>
             <img className="carousel-img" src={log.image} alt={log.date} />
-            {/* <Carousel.Caption> */}
-            <h3>{log.date}</h3>
-            <h5>Description:</h5>
-            <p>{log.description}</p>
-            {/* </Carousel.Caption> */}
-            </div>
-        // </Carousel.Item>
+            <Carousel.Caption style={{backgroundColor: 'rgba(202, 243, 202, 0.4)'}}>
+                <h5>{log.date}</h5>
+                <hr/>
+                <p>{log.description}</p>
+            </Carousel.Caption>
+        </Carousel.Item>
     )})
     
     let oldDate = new Date(lastWatered.split("-")).toLocaleDateString()
@@ -107,7 +107,7 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
                 <b>Are you sure you want to delete this plant?</b>
                 <Button onClick={() => handleDeletePlant(id)} variant="success" size="sm" style={{width: '100px'}}>Yes</Button>
             </Popup>
-            <h4>{plant_name}</h4>
+            <h5>{plant_name}</h5>
             <img src={image} alt={plant_name}/>
             <em>{plant_sci_name}</em>
             Last watered: {oldDate}<br/>
@@ -128,9 +128,9 @@ function PlantCard({id, logs, date, image, watering_frequency, plant_name, plant
             </div>
             }
             Water again on: {newDate(lastWatered, days)}<br/>
-            <div style={{display: 'inline-block'}}>
-                <Popup classname="diary" trigger={<Button variant="outline-success" size="sm">Plant Diary</Button>} modal nested>
-                    <Carousel centerMode="true">
+            <div className="card-buttons" style={{display: 'inline-block'}}>
+                <Popup className="diary" trigger={<Button variant="outline-success" size="sm">Plant Diary</Button>} modal nested>
+                    <Carousel activeIndex={carouselIndex} onSelect={handleSelect}>
                         {logArray}
                     </Carousel>
                     <Popup trigger={<Button variant="success" size="sm">Add an update about this plant!</Button>} position="top center" {...{contentStyle}}>
